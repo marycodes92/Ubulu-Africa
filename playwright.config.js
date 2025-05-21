@@ -11,6 +11,7 @@ export default defineConfig({
   retries: 1,
   use: {
     baseURL: 'https://www.saucedemo.com',
+    headless: true,
     screenshot: 'only-on-failure',
     trace: 'on-first-retry',
     video: 'on-first-retry',
