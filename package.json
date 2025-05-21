@@ -1,0 +1,19 @@
+{
+  "name": "ubulu-africa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:ui": "npx playwright test --grep @UITest --debug",
+    "test:logout": "npx playwright test --grep @Logout --debug",
+    "test:login": "npx playwright test --grep @Login --debug",
+    "test": "npx playwright test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@playwright/test": "^1.52.0",
+    "playwright": "^1.52.0"
+  }
+}
