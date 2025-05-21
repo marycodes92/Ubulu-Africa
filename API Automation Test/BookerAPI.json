@@ -553,7 +553,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"firstname\": \"Mary\",\n    \"lastname\": \"Onuorah\"\n}",
+							"raw": "{\n    \"firstname\": \"Mary\",\n    \"totalprice\": 4500,\n    \"depositpaid\": true,\n    \"bookingdates\": {\n        \"checkin\": \"2013-02-23\",\n        \"checkout\": \"2014-10-23\"\n    },\n    \"additionalneeds\": \"Lunch\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
