@@ -1,0 +1,634 @@
+{
+	"info": {
+		"_postman_id": "7ecce3fa-152e-40a5-b974-239fb5bf867c",
+		"name": "Booker API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "159cd88c-6e82-4c4e-9879-2a5db5ed7230",
+								"exec": [
+									"const response = pm.response.json()",
+									"",
+									"pm.test('verify response code and status', () => {",
+									"    pm.expect(pm.response.code).to.eql(200)",
+									"    pm.expect(pm.response.status).to.eql('OK')",
+									"})",
+									"",
+									"pm.test('verify response structure and content', ()=> {",
+									"    pm.expect(response).to.be.an('Object')",
+									"    pm.expect(response).to.have.property('token')",
+									"    pm.expect(response.token).to.be.a('String').and.not.empty",
+									"})",
+									"",
+									"pm.test('verify response time is under 1000ms', () => {",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000)",
+									"})",
+									"",
+									"if (response && response.token) {",
+									"    pm.environment.set('token', response.token)",
+									"}",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "1973159a-43fa-45a5-9e31-a24f4a2ccc2d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\" : \"admin\",\n    \"password\" : \"password123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/auth"
+					},
+					"response": []
+				},
+				{
+					"name": "incompleteRequestBody",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "159cd88c-6e82-4c4e-9879-2a5db5ed7230",
+								"exec": [
+									"const response = pm.response.json()",
+									"",
+									"pm.test('verify response code and status', () => {",
+									"    pm.expect(pm.response.code).to.eql(400)",
+									"    pm.expect(pm.response.status).to.eql('Bad Request')",
+									"})",
+									"",
+									"pm.test('verify response structure and content', ()=> {",
+									"    pm.expect(response).to.be.an('Object')",
+									"    pm.expect(response).to.property('reason')",
+									"    pm.expect(response.reason).to.be.a('String').and.to.not.be.empty",
+									"})",
+									"",
+									"pm.test('verify response time is under 1000ms', () => {",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000)",
+									"})",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "1a2c13f4-6ca1-4035-8517-f2aa1cc2f2fe",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\" : \"password123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/auth"
+					},
+					"response": []
+				},
+				{
+					"name": "withoutRequestBody",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "159cd88c-6e82-4c4e-9879-2a5db5ed7230",
+								"exec": [
+									"const response = pm.response.json()",
+									"",
+									"pm.test('verify response code and status', () => {",
+									"    pm.expect(pm.response.code).to.eql(400)",
+									"    pm.expect(pm.response.status).to.eql('Bad Request')",
+									"})",
+									"",
+									"pm.test('verify response structure and content', ()=> {",
+									"    pm.expect(response).to.be.an('Object')",
+									"    pm.expect(response).to.property('reason')",
+									"    pm.expect(response.reason).to.be.a('String').and.to.not.be.empty",
+									"})",
+									"",
+									"pm.test('verify response time is under 1000ms', () => {",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000)",
+									"})",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "3bd95107-d02f-46a4-bb1d-c0fd646f2181",
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "d8e95ce7-4964-46d9-b28b-72dff3e0ba9b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/auth"
+					},
+					"response": []
+				}
+			],
+			"id": "e7ab03cc-33bc-434c-ba4d-f7b96e2f5986"
+		},
+		{
+			"name": "createBooking",
+			"item": [
+				{
+					"name": "createBooking",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "34712fc8-83f9-43e4-9a93-2b1538475a4f",
+								"exec": [
+									"const schema = {",
+									"    type: 'object',",
+									"    properties: {",
+									"        bookingid: { type: 'number' },",
+									"        booking: {",
+									"            type: 'object',",
+									"            properties: {",
+									"                firstname: { type: 'string' },",
+									"                lastname: { type: 'string' },",
+									"                totalprice: { type: 'number' },",
+									"                depositpaid: { type: 'boolean' },",
+									"                bookingdates: {",
+									"                    type: 'object',",
+									"                    properties: {",
+									"                        checkin: { type: 'string', format: 'date' },",
+									"                        checkout: { type: 'string', format: 'date' }",
+									"                    },",
+									"                    required: ['checkin', 'checkout']",
+									"                },",
+									"                additionalneeds: { type: 'string' }",
+									"            },",
+									"            required: ['firstname', 'lastname', 'totalprice', 'depositpaid', 'bookingdates', 'additionalneeds']",
+									"        }",
+									"    },",
+									"    required: ['bookingid', 'booking']",
+									"}",
+									"",
+									"const response = pm.response.json()",
+									"",
+									"pm.test('validate response schema', () => {",
+									"    pm.expect(response).to.have.jsonSchema(schema)",
+									"})",
+									"",
+									"pm.test('verify response code and status', () => {",
+									"    pm.expect(pm.response.code).to.eql(201)",
+									"    pm.expect(pm.response.status).to.eql('Created')",
+									"})",
+									"",
+									"pm.test('verify response have bookingId and booking object', () => {",
+									"    pm.expect(response).to.have.property('bookingid')",
+									"    pm.expect(response).to.have.property('booking')",
+									"    pm.expect(response.booking).to.be.an('object')",
+									"})",
+									"",
+									"pm.test('verify booking object have correct properties', () => {",
+									"    const booking = response.booking",
+									"    pm.expect(booking).to.have.property('firstname')",
+									"    pm.expect(booking.firstname).to.eql(pm.environment.get('firstname'))",
+									"    pm.expect(booking).to.have.property('lastname')",
+									"    pm.expect(booking.lastname).to.eql(pm.environment.get('lastname'))",
+									"    pm.expect(booking).to.have.property('totalprice')",
+									"    pm.expect(booking).to.have.property('depositpaid')",
+									"    pm.expect(booking).to.have.property('additionalneeds')",
+									"",
+									"    pm.expect(booking.bookingdates).to.be.an(\"object\")",
+									"    pm.expect(booking.bookingdates).to.have.property('checkin')",
+									"    pm.expect(booking.bookingdates).to.have.property('checkout')",
+									"})",
+									"",
+									"pm.test('verify response time is less than 1000ms', () => {",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000)",
+									"})",
+									"",
+									"if (response.bookingid) {",
+									"    pm.environment.set('bookingId', response.bookingid)",
+									"}",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "285b2977-6e21-42a9-a217-6cf39f65004e",
+								"exec": [
+									"pm.environment.set(\"firstname\", pm.variables.replaceIn(\"{{$randomFirstName}}\"));",
+									"pm.environment.set(\"lastname\", pm.variables.replaceIn(\"{{$randomLastName}}\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "ef64566b-94ce-4fc1-89d7-222192eb7453",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstname\": \"{{firstname}}\",\n    \"lastname\": \"{{lastname}}\",\n    \"totalprice\": 4500,\n    \"depositpaid\": true,\n    \"bookingdates\": {\n        \"checkin\": \"2013-02-23\",\n        \"checkout\": \"2014-10-23\"\n    },\n    \"additionalneeds\": \"Lunch\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/booking"
+					},
+					"response": []
+				},
+				{
+					"name": "invalidRequestBody",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "34712fc8-83f9-43e4-9a93-2b1538475a4f",
+								"exec": [
+									"const schema = {",
+									"    type: 'object',",
+									"    properties: {",
+									"        bookingid: { type: 'number' },",
+									"        booking: {",
+									"            type: 'object',",
+									"            properties: {",
+									"                firstname: { type: 'string' },",
+									"                lastname: { type: 'string' },",
+									"                totalprice: { type: 'number' },",
+									"                depositpaid: { type: 'boolean' },",
+									"                bookingdates: {",
+									"                    type: 'object',",
+									"                    properties: {",
+									"                        checkin: { type: 'string', format: 'date' },",
+									"                        checkout: { type: 'string', format: 'date' }",
+									"                    },",
+									"                    required: ['checkin', 'checkout']",
+									"                },",
+									"                additionalneeds: { type: 'string' }",
+									"            },",
+									"            required: ['firstname', 'lastname', 'totalprice', 'depositpaid', 'bookingdates']",
+									"        }",
+									"    },",
+									"    required: ['bookingid', 'booking']",
+									"}",
+									"",
+									"const response = pm.response.json()",
+									"",
+									"pm.test('validate response schema', () => {",
+									"    pm.expect(response).to.have.jsonSchema(schema)",
+									"})",
+									"",
+									"pm.test('verify response code and status', () => {",
+									"    pm.expect(pm.response.code).to.eql(400)",
+									"    pm.expect(pm.response.status).to.eql('Bad Request')",
+									"})",
+									"",
+									"pm.test('verify response structure and content', ()=> {",
+									"    pm.expect(response).to.be.an('Object')",
+									"    pm.expect(response).to.property('reason')",
+									"    pm.expect(response.reason).to.be.a('String').and.to.not.be.empty",
+									"})",
+									"",
+									"pm.test('verify response time is less than 1000ms', () => {",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000)",
+									"})",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "285b2977-6e21-42a9-a217-6cf39f65004e",
+								"exec": [
+									"pm.environment.set(\"firstname\", pm.variables.replaceIn(\"{{$randomFirstName}}\"));",
+									"pm.environment.set(\"lastname\", pm.variables.replaceIn(\"{{$randomLastName}}\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "8453b631-235a-4aa1-bf9a-b8166e0f9354",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstname\": \"{{firstname}}\",\n    \"lastname\": \"{{lastname}}\",\n    \"totalprice\": 4500,\n    \"bookingdates\": {\n        \"checkin\": \"2013-02-23\",\n        \"checkout\": \"2014-10-23\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://restful-booker.herokuapp.com/booking"
+					},
+					"response": []
+				}
+			],
+			"id": "307d796d-f347-4e2c-9277-8842b1cd73b0"
+		},
+		{
+			"name": "updateBooking",
+			"item": [
+				{
+					"name": "updateBooking",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e7738276-673a-4e78-9844-09b23900535f",
+								"exec": [
+									"const schema = {",
+									"    type: 'object',",
+									"    properties: {",
+									"        bookingid: { type: 'number' },",
+									"        booking: {",
+									"            type: 'object',",
+									"            properties: {",
+									"                firstname: { type: 'string' },",
+									"                lastname: { type: 'string' },",
+									"                totalprice: { type: 'number' },",
+									"                depositpaid: { type: 'boolean' },",
+									"                bookingdates: {",
+									"                    type: 'object',",
+									"                    properties: {",
+									"                        checkin: { type: 'string', format: 'date' },",
+									"                        checkout: { type: 'string', format: 'date' }",
+									"                    },",
+									"                    required: ['checkin', 'checkout']",
+									"                },",
+									"                additionalneeds: { type: 'string' }",
+									"            },",
+									"            required: ['firstname', 'lastname', 'totalprice', 'depositpaid', 'bookingdates', 'additionalneeds']",
+									"        }",
+									"    },",
+									"    required: ['bookingid', 'booking']",
+									"}",
+									"",
+									"const response = pm.response.json()",
+									"",
+									"pm.test('validate response schema', () => {",
+									"    pm.expect(response).to.have.jsonSchema(schema)",
+									"})",
+									"",
+									"pm.test('verify response code and status', () => {",
+									"    pm.expect(pm.response.code).to.eql(200)",
+									"    pm.expect(pm.response.status).to.eql('OK')",
+									"})",
+									"",
+									"pm.test('verify response have bookingId and booking object', () => {",
+									"    pm.expect(response).to.have.property('bookingid')",
+									"    pm.expect(response).to.have.property('booking')",
+									"    pm.expect(response.booking).to.be.an('object')",
+									"})",
+									"",
+									"pm.test('verify booking object have correct properties', () => {",
+									"    const booking = response.booking",
+									"    pm.expect(booking).to.have.property('firstname')",
+									"    pm.expect(booking.firstname).to.eql(pm.environment.get('firstname'))",
+									"    pm.expect(booking).to.have.property('lastname')",
+									"    pm.expect(booking.lastname).to.eql(pm.environment.get('lastname'))",
+									"    pm.expect(booking).to.have.property('totalprice')",
+									"    pm.expect(booking).to.have.property('depositpaid')",
+									"    pm.expect(booking).to.have.property('additionalneeds')",
+									"",
+									"    pm.expect(booking.bookingdates).to.be.an(\"object\")",
+									"    pm.expect(booking.bookingdates).to.have.property('checkin')",
+									"    pm.expect(booking.bookingdates).to.have.property('checkout')",
+									"})",
+									"",
+									"pm.test('verify response time is less than 1000ms', () => {",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000)",
+									"})",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "289cecbc-f5be-45d9-a8fa-4f6a4ce0ddab",
+								"exec": [
+									"const schema = {",
+									"    type: 'object',",
+									"    properties: {",
+									"        bookingid: { type: 'number' },",
+									"        booking: {",
+									"            type: 'object',",
+									"            properties: {",
+									"                firstname: { type: 'string' },",
+									"                lastname: { type: 'string' },",
+									"                totalprice: { type: 'number' },",
+									"                depositpaid: { type: 'boolean' },",
+									"                bookingdates: {",
+									"                    type: 'object',",
+									"                    properties: {",
+									"                        checkin: { type: 'string', format: 'date' },",
+									"                        checkout: { type: 'string', format: 'date' }",
+									"                    },",
+									"                    required: ['checkin', 'checkout']",
+									"                },",
+									"                additionalneeds: { type: 'string' }",
+									"            },",
+									"            required: ['firstname', 'lastname', 'totalprice', 'depositpaid', 'bookingdates', 'additionalneeds']",
+									"        }",
+									"    },",
+									"    required: ['bookingid', 'booking']",
+									"}",
+									"",
+									"const response = pm.response.json();",
+									"",
+									"pm.test('verify response code and status', () => {",
+									"    pm.expect(pm.response.code).to.eql(200)",
+									"    pm.expect(pm.response.status).to.eql('OK')",
+									"})",
+									"",
+									"pm.test('verify booking object have correct properties', () => {",
+									"    const booking = response.booking",
+									"    pm.expect(booking).to.have.property('firstname')",
+									"    pm.expect(booking.firstname).to.eql('Mary')",
+									"    pm.expect(booking).to.have.property('lastname')",
+									"    pm.expect(booking.lastname).to.eql('Onuorah')",
+									"    pm.expect(booking).to.have.property('totalprice')",
+									"    pm.expect(booking).to.have.property('depositpaid')",
+									"    pm.expect(booking).to.have.property('additionalneeds')",
+									"",
+									"    pm.expect(booking.bookingdates).to.be.an(\"object\")",
+									"    pm.expect(booking.bookingdates).to.have.property('checkin')",
+									"    pm.expect(booking.bookingdates).to.have.property('checkout')",
+									"})",
+									"",
+									"pm.test(\"Response time is less than 2 seconds\", () => {",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "913c6e92-b1ed-46da-8d6c-ea71a06722ea",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstname\": \"Mary\",\n    \"lastname\": \"Onuorah\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/booking/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"booking",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{bookingId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "f2c441bc-0ba1-46dc-bed8-3aec0a53032b"
+		},
+		{
+			"name": "deleteBooking",
+			"item": [
+				{
+					"name": "deleteBooking",
+					"id": "bd6448cc-2313-410f-b37f-70f9c0fd5d8c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "Authorization",
+								"password": "{{auth_token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/booking/?id={{bookingId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"booking",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{bookingId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "e28db533-ea68-4e89-ac2b-628e0894b29c"
+		}
+	]
+}
