@@ -388,7 +388,7 @@
 								}
 							}
 						},
-						"url": "https://restful-booker.herokuapp.com/booking"
+						"url": "{{baseUrl}}/booking"
 					},
 					"response": []
 				}
@@ -533,8 +533,8 @@
 								"exec": [
 									"const response = pm.response.json()",
 									"",
-									"pm.test('verify status code is 201 or 200', () => {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200, 201])",
+									"pm.test('verify status code is 203 or 200', () => {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 203])",
 									"})",
 									"",
 									"pm.test('Response should be empty or contain confirmation', () => {",
