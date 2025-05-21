@@ -525,6 +525,32 @@
 			"item": [
 				{
 					"name": "deleteBooking",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f8393bd1-c04d-4841-87a0-3126e6b9c9c5",
+								"exec": [
+									"const response = pm.response.json()",
+									"",
+									"pm.test('Status code is 201 or 200 (delete successful)', () => {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201])",
+									"})",
+									"",
+									"pm.test('Response should be empty or contain confirmation', () => {",
+									"    pm.expect(responseText === '' || responseText.includes('Deleted')).to.be.true",
+									"})",
+									"",
+									"pm.test('Response time is less than 1000ms', () => {",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000)",
+									"})",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"id": "bd6448cc-2313-410f-b37f-70f9c0fd5d8c",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
