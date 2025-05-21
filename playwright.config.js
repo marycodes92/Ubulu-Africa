@@ -8,6 +8,7 @@ export default defineConfig({
   testDir: './tests',
   reporter: 'html', 
   timeout: 30 * 1000,
+  retries: 1,
   use: {
     baseURL: 'https://www.saucedemo.com',
     screenshot: 'only-on-failure',
