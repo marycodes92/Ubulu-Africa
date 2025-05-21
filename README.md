@@ -22,3 +22,4 @@ To run the test;
 - In the `package.json` file, you'd see a couple of scripts to run the test as you wish
 
 I also added a github workflow to run the test in the pipeline and the trigger is `push` 
+You can check the `Actions` tab on github to see the Run.
