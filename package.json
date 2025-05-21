@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:ui": "npx playwright test --grep @UITest --debug",
-    "test:logout": "npx playwright test --grep @Logout --debug",
-    "test:login": "npx playwright test --grep @Login --debug",
+    "test:ui": "npx playwright test --grep @UITest",
+    "test:logout": "npx playwright test --grep @Logout",
+    "test:login": "npx playwright test --grep @Login",
     "test": "npx playwright test"
   },
   "keywords": [],
