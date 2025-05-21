@@ -533,7 +533,7 @@
 								"exec": [
 									"const response = pm.response.json()",
 									"",
-									"pm.test('Status code is 201 or 200 (delete successful)', () => {",
+									"pm.test('verify status code is 201 or 200', () => {",
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201])",
 									"})",
 									"",
