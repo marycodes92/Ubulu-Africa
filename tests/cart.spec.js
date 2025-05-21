@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { Cart } from '../page-objects/Cart.js';
 
-test.describe('Cart Tests', () => {
+test.describe('@UITest Cart Tests', () => {
     test('Should add to cart and remove products from cart', async ({ browser }) => {
         const context = await browser.newContext({
             storageState: 'state.json'

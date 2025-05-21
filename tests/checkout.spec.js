@@ -3,7 +3,7 @@ import { Cart } from '../page-objects/Cart.js';
 import { Checkout } from '../page-objects/Checkout.js';
 
 
-test.only('Should add to cart and remove products from cart', async ({ browser }) => {
+test('@UITest Should add to cart and remove products from cart', async ({ browser }) => {
     const context = await browser.newContext({
         storageState: 'state.json'
     });

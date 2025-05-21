@@ -3,8 +3,6 @@ name: Playwright Test
 on: 
   push: 
     branches: [main]
-  pull_request: 
-    branches: [main]
 
 jobs:
   test: 
@@ -23,10 +21,16 @@ jobs:
         run: npm ci
 
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: npx playwright install
 
-      - name: Run Playwright Tests
-        run: npx playwright test --reporter=html --trace on --config=playwright.config.ts
+      - name: Run Playwright Tests (Login)
+        run: npm run test:login
+      
+      - name: Run Playwright Tests (Cart/Checkout)
+        run: npm run test:ui
+      
+      - name: Run Playwright Tests (Logout)
+        run: npm run test:logout
         
       - name: Upload Playwright Report
         uses: actions/upload-artifact@v4

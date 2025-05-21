@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { LoginPage } from '../page-objects/Login';
 
 
-test('should login with valid details', async ({ page }) => {
+test('@Logout should login with valid details', async ({ page }) => {
     const login = new LoginPage(page);
     await page.goto('/');
     await login.loginSteps('standard_user', 'secret_sauce');
